@@ -3,7 +3,79 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* css written by GitHub Copilot */
+
+      /* Basic page reset */
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial;
+        margin: 0;
+        padding: 24px;
+        background: #f9fafb;
+        color: #111827;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Styled dropdown */
+      #countries-dropdown-menu {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 320px;
+        max-width: 100%;
+        padding: 10px 44px 10px 14px;
+        font-size: 16px;
+        line-height: 1.2;
+        color: #111827;
+        background-color: #ffffff;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+        cursor: pointer;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%236b7280' stroke-width='2'><path d='M6 8l4 4 4-4'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 16px;
+        transition: border-color 0.12s ease, box-shadow 0.12s ease,
+          transform 0.06s ease;
+      }
+
+      #countries-dropdown-menu:focus {
+        outline: none;
+        border-color: #60a5fa;
+        box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.12);
+      }
+
+      #countries-dropdown-menu:hover {
+        box-shadow: 0 6px 18px rgba(16, 24, 40, 0.08);
+      }
+
+      #countries-dropdown-menu option {
+        padding: 8px 12px;
+      }
+
+      /* Small responsive tweak */
+      @media (max-width: 420px) {
+        #countries-dropdown-menu {
+          width: 100%;
+        }
+      }
+
+      /* If the viewport height is reduced (e.g. devtools docked), nudge the control up
+   so it remains visible instead of being too close to the bottom edge. */
+      @media (max-height: 700px) {
+        #countries-dropdown-menu {
+          transform: translateY(-8vh);
+        }
+      }
+    </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.6.0/moment-timezone-with-data-1970-2030.min.js"></script>
     <title>Dropdown Timezone</title>
@@ -15,6 +87,23 @@
       <option value="Europe/Paris">Paris 🇫🇷</option>
       <option value="Australia/Sydney">Sydney 🇦🇺</option>
     </select>
-    <script src="index.js"></script>
+    <script>
+      showDate = (event) => {
+        if (event.target.value.length > 0) {
+          let currentTime = moment()
+            .tz(event.target.value)
+            .format("dddd, MMMM D, YYYY h:mm A");
+
+          let cityName = event.target.options[event.target.selectedIndex].text;
+
+          alert(`It is ${currentTime} in ${cityName}`);
+        }
+      };
+
+      let currentTimeElement = document.querySelector(
+        "#countries-dropdown-menu"
+      );
+      currentTimeElement.addEventListener("change", showDate);
+    </script>
   </body>
 </html>
